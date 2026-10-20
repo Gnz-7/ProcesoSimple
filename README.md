@@ -1,7 +1,7 @@
-# Gestor de Solicitudes — Demo de Playwright
+# Gestor de Solicitudes
 
-Aplicación web sencilla de demostración educativa para automatización con Playwright.
-Gestiona una única entidad (solicitudes) con inicio de sesión simulado, creación, edición y borrado completos, y persistencia local.
+Aplicación web para gestionar solicitudes internas: crear, consultar, editar y eliminar registros,
+con búsqueda por título y filtro por estado.
 
 ## Requisitos previos
 
@@ -16,24 +16,24 @@ npm run dev
 
 Abre la URL que indica Vite (normalmente <http://localhost:5173>).
 
-## Credenciales de demostración
+## Credenciales de acceso
 
 - Usuario: `alumno`
 - Contraseña: `Playwright123`
 
-No existe registro ni recuperación de contraseñas: es una sesión simulada en `sessionStorage`.
+No existe registro ni recuperación de contraseñas: la sesión se guarda en `sessionStorage`.
 
 ## Cómo restablecer los datos
 
 En el listado, pulsa el botón **«Restablecer datos de prueba»** y confirma.
-Se reemplazan las solicitudes actuales por los 5 datos de ejemplo iniciales (operación idempotente).
+Se reemplazan las solicitudes actuales por las 5 solicitudes iniciales (operación idempotente).
 
 ## Limitaciones de la persistencia
 
 - Las solicitudes se guardan en `localStorage` bajo la clave `procesosimple.solicitudes`.
 - Los datos son locales del navegador y del origen: no se sincronizan entre dispositivos ni navegadores.
-- Si borras los datos de navegación, las solicitudes se pierden (el restablecimiento vuelve a dejar los datos de ejemplo).
-- Si los datos almacenados se corrompen, la aplicación recupera automáticamente los datos de prueba.
+- Si borras los datos de navegación, las solicitudes se pierden (el restablecimiento vuelve a dejar las solicitudes iniciales).
+- Si los datos almacenados se corrompen, la aplicación recupera automáticamente las solicitudes iniciales.
 - La sesión se guarda en `sessionStorage` y se pierde al cerrar la pestaña.
 
 ## Estructura del código
@@ -43,9 +43,9 @@ src/
   main.jsx          Entrada de la aplicación (enrutador)
   App.jsx           Rutas y protección de sesión
   constants.js      Opciones permitidas, credenciales, claves de almacenamiento
-  session.js        Sesión simulada en sessionStorage
+  session.js        Sesión en sessionStorage
   storage.js        Persistencia centralizada en localStorage
-  seedData.js       Datos iniciales deterministas
+  seedData.js       Solicitudes iniciales
   validation.js     Validaciones reutilizables
   components/       Cabecera, formularios, diálogo, etiquetas
   pages/            Inicio de sesión, Listado, Crear, Detalle, Editar
@@ -53,4 +53,4 @@ src/
 ```
 
 Los elementos interactivos incluyen atributos `data-testid` y nombres accesibles
-estables para facilitar la automatización con Playwright.
+estables, con etiquetado HTML semántico.
